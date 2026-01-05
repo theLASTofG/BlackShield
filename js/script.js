@@ -16,24 +16,68 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close menu when clicking a link
+        // Close menu when clicking a link (except dropdown parents)
         navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenu.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            });
+            if (!link.closest('.dropdown') || link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenu.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            }
         });
     }
 
-    // 2. Header Scroll Effect
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.padding = '5px 0';
-            header.style.background = 'rgba(0, 0, 0, 0.98)';
-        } else {
-            header.style.padding = '10px 0';
-            header.style.background = 'rgba(0, 0, 0, 0.9)';
+    // 1.5. Dropdown Toggle for Mobile/Touch Devices
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const dropdownLink = dropdown.querySelector('a');
+        
+        // Detect if device is touch-enabled or mobile
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isTouchDevice || isMobile) {
+            dropdownLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Close other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            });
         }
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });}
+
+    // 2. Header Scroll Effect (with debounce)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        
+        scrollTimeout = window.requestAnimationFrame(() => {
+            if (window.scrollY > 50) {
+                header.style.padding = '5px 0';
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+            }
+        });
     });
 
     // 3. Reveal Animations on Scroll
@@ -68,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Chat Widget Functionality
+    // 5. Chat Widget Functionality (with validation)
     const chatInput = document.querySelector('.chat-widget input');
     const sendButton = document.querySelector('.btn-send');
 
@@ -76,9 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const sendMessage = () => {
             const message = chatInput.value.trim();
             if (message) {
+                // Visual feedback
+                sendButton.textContent = 'SENDING...';
+                sendButton.disabled = true;
+                
                 const whatsappUrl = `https://wa.me/61401803255?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
-                chatInput.value = '';
+                
+                // Reset after short delay
+                setTimeout(() => {
+                    chatInput.value = '';
+                    sendButton.textContent = 'SEND';
+                    sendButton.disabled = false;
+                }, 1000);
+            } else {
+                // Shake animation for empty input
+                chatInput.style.animation = 'shake 0.3s';
+                setTimeout(() => {
+                    chatInput.style.animation = '';
+                }, 300);
             }
         };
 

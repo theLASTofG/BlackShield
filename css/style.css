@@ -183,6 +183,307 @@ nav a:hover {
     border-radius: 4px;
 }
 
+/* A/C Service Card Styles */
+.ac-service-icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.ac-service-card h4 {
+    font-size: 1.5rem;
+    color: var(--color-text-dark);
+    margin: 15px 0;
+}
+
+.ac-price {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.ac-price strong {
+    font-size: 2.2rem;
+}
+
+.ac-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.ac-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* A/C Special Banner */
+.ac-special-banner {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    margin: 30px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.ac-special-banner h4 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.ac-special-banner p {
+    color: var(--color-text-dark);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.special-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.special-features li {
+    color: var(--color-text-dark);
+    padding: 8px 0;
+    font-size: 1rem;
+}
+
+.special-cta {
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+/* Hero Message Module */
+.hero-message-module {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.hero-message-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero-message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
+}
+
+.hero-message-module .container {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-message-module h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.hero-message-module p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+/* Chat Widget */
+.chat-widget {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-widget input {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.btn-send {
+    background: var(--color-accent);
+    color: black;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Window Tint Styles */
+.window-tint-module {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.tint-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.tint-overlay {
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    padding: 80px 0;
+}
+
+.tint-content {
+    text-align: center;
+}
+
+.tint-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.tint-feature {
+    text-align: center;
+}
+
+.tint-feature i {
+    font-size: 3rem;
+    color: var(--color-accent);
+    margin-bottom: 15px;
+}
+
+.tint-feature h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.tint-pricing-list {
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 30px auto;
+    color: var(--color-text-dark);
+}
+
+.pricing-title {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.tint-pricing-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tint-pricing-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.1rem;
+}
+
+.tint-pricing-list li:last-child {
+    border-bottom: none;
+}
+
+/* Car Card Styles */
+.car-price {
+    font-size: 2rem;
+    color: var(--color-accent);
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.car-price span {
+    font-size: 1rem;
+    color: #666;
+    font-weight: normal;
+}
+
+.car-card h4 {
+    font-size: 1.5rem;
+    color: var(--color-text-dark);
+    margin: 15px 0;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* Benefit Card Styles */
+.benefit-icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.benefit-card h4 {
+    font-size: 1.5rem;
+    color: var(--color-text-dark);
+    margin: 15px 0;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
 /* WhatsApp Float */
 .whatsapp-float {
     position: fixed;
@@ -221,6 +522,27 @@ footer {
 }
 
 /* Responsividade (Mobile First / Breakpoints) */
+
+/* Tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .hero-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .ac-services-grid, .benefits-grid, .car-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container {
+        width: 85%;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -257,6 +579,35 @@ footer {
     .ac-special-banner {
         padding: 15px;
     }
+
+    .dropdown-content {
+        position: static;
+        display: none;
+        background: rgba(0,0,0,0.85);
+        border-top: none;
+        padding-left: 20px;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .hero-message-module h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-message-module p {
+        font-size: 1rem;
+    }
+
+    .chat-widget {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .chat-widget input {
+        width: 100%;
+    }
 }
 
 /* Animations */
@@ -286,4 +637,11 @@ footer {
 .btn-primary:hover {
     background: var(--color-primary);
     color: white;
+}
+
+/* Shake Animation for Input Validation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
