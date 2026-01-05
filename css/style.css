@@ -1212,7 +1212,7 @@ nav a.btn-quote:hover {
     }
 
     .logo img {
-        height: 30px;
+        height: 45px; /* Aumentado de 30px para preencher melhor o espaço */
     }
 
     .content-module {
@@ -1425,7 +1425,7 @@ nav a.btn-quote:hover {
     }
 
     .header-content .logo img {
-        height: 28px;
+        height: 40px; /* Aumentado de 28px para iPhone/S24 */
     }
 
     nav a {
