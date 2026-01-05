@@ -1228,8 +1228,18 @@ nav a.btn-quote:hover {
 
     /* Window Tint */
     .window-tint-module {
-        height: 50vh; /* Reduzido de 60vh */
-        min-height: 450px;
+        height: 45vh; /* Otimização máxima para visualização imediata */
+        min-height: 400px;
+        margin-bottom: 30px;
+    }
+
+    .tint-pricing-container {
+        margin-bottom: 50px;
+    }
+
+    .how-it-works-module {
+        padding-top: 60px !important;
+        clear: both;
     }
 
     .tint-overlay {
