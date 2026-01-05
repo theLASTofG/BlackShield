@@ -1074,6 +1074,36 @@ nav a.btn-quote:hover {
 
 /* --- Advanced Responsiveness & Mobile Optimization --- */
 
+/* Menu Toggle Styles */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text-light);
+    margin: 4px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+/* Menu Toggle Animation */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
 /* Tablets and Small Laptops (up to 1024px) */
 @media (max-width: 1024px) {
     .container {
@@ -1091,30 +1121,69 @@ nav a.btn-quote:hover {
 
 /* Tablets (up to 992px) */
 @media (max-width: 992px) {
+    .menu-toggle {
+        display: flex;
+    }
+
     .header-content {
-        flex-direction: column;
+        flex-direction: row;
         padding: 10px 0;
+        justify-content: space-between;
+        width: 90%;
     }
 
     nav {
-        margin-top: 15px;
-        flex-wrap: wrap;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
         justify-content: center;
-        gap: 5px;
+        align-items: center;
+        transition: 0.5s;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        border-left: 2px solid var(--color-primary);
+    }
+
+    nav.active {
+        right: 0;
     }
 
     nav a {
-        margin: 5px;
-        font-size: 0.85rem;
+        margin: 15px 0;
+        font-size: 1.2rem;
     }
 
     .dropdown {
-        margin: 5px;
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: static;
+        transform: none;
+        background-color: transparent;
+        box-shadow: none;
+        border-top: none;
+        display: block;
+        padding: 0;
+    }
+
+    .dropdown-content a {
+        font-size: 1rem;
+        padding: 8px 0;
+        text-align: center;
+        color: var(--color-accent);
     }
 
     .btn-quote {
         margin-left: 0 !important;
-        margin-top: 10px !important;
+        margin-top: 20px !important;
+        width: 80%;
+        text-align: center;
     }
 
     .how-it-works-content {
@@ -1132,30 +1201,66 @@ nav a.btn-quote:hover {
     }
 }
 
-/* Mobile Devices (up to 768px) */
+    /* Mobile Devices (up to 768px) */
 @media (max-width: 768px) {
     body {
-        font-size: 18px; /* Garantindo fonte legível no mobile */
+        font-size: 16px; 
+    }
+
+    #main-header {
+        padding: 10px 0;
+    }
+
+    .logo img {
+        height: 30px;
     }
 
     .content-module {
-        padding: 40px 0; /* Reduzido de 50px para otimizar espaço vertical */
+        padding: 40px 0; 
     }
 
     h3 {
-        font-size: 1.9rem; /* Ajuste fino para S24 */
-        margin-bottom: 20px;
+        font-size: 1.6rem; 
+        margin-bottom: 15px;
         letter-spacing: -0.5px;
+        padding: 0 15px;
+        line-height: 1.2;
     }
 
     .section-title {
-        font-size: 1.2rem; /* Reduzido de 1.3rem para evitar quebras */
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
 
     /* Hero & A/C Section */
     .ac-services-module {
-        height: 45vh; /* Otimização máxima para visualização imediata */
-        min-height: 400px;
+        height: auto;
+        min-height: 100vh;
+        padding-top: 70px;
+        display: block;
+    }
+
+    .ac-overlay {
+        padding: 40px 0;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .ac-content {
+        padding-top: 20px;
+    }
+
+    .ac-special-banner {
+        padding: 15px;
+        margin: 15px 5px;
+    }
+
+    .ac-special-banner h4 {
+        font-size: 1.1rem;
+    }
+
+    .ac-special-banner p, .special-features li {
+        font-size: 0.85rem;
     }
 
     .ac-overlay {
@@ -1308,34 +1413,52 @@ nav a.btn-quote:hover {
     }
 }
 
-/* Small Mobile Devices (up to 480px) */
+/* Small Mobile Devices (up to 480px) - iPhone & S24 Optimization */
 @media (max-width: 480px) {
     body {
-        font-size: 17px;
+        font-size: 15px;
     }
 
     h3 {
-        font-size: 1.7rem; /* Ajuste fino para telas pequenas */
+        font-size: 1.5rem; 
+        padding: 0 10px;
     }
 
     .header-content .logo img {
-        height: 35px;
+        height: 28px;
     }
 
     nav a {
-        font-size: 0.85rem; /* Ajuste para evitar quebras no menu */
-        margin: 4px;
+        font-size: 1.1rem;
+        margin: 10px 0;
     }
 
     .btn-quote {
-        margin-bottom: 15px !important; /* Adicionada margem inferior para separação */
+        margin-bottom: 10px !important;
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
     }
 
     .btn-primary {
         padding: 12px 20px;
         font-size: 0.9rem;
-        width: 100%;
+        width: 90%;
+        margin: 20px auto;
+        display: block;
         text-align: center;
+    }
+
+    .ac-service-card {
+        padding: 20px 15px;
+    }
+
+    .ac-price {
+        font-size: 1.2rem;
+    }
+
+    .ac-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
     }
 
     .chat-widget {

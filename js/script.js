@@ -101,3 +101,22 @@ console.log("Black Shield Website - Scripts Loaded Successfully");
 console.log(
   "Features: Header transparency, Video backgrounds, Scroll animations, Smooth navigation, WhatsApp integration, A/C Services"
 );
+
+// Mobile Menu Toggle
+const mobileMenu = document.getElementById("mobile-menu");
+const navMenu = document.getElementById("nav-menu");
+
+if (mobileMenu && navMenu) {
+  mobileMenu.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    navMenu.classList.toggle("active");
+  });
+
+  // Close menu when clicking a link
+  document.querySelectorAll("nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      navMenu.classList.remove("active");
+    });
+  });
+}
