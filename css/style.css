@@ -1228,27 +1228,47 @@ nav a.btn-quote:hover {
 
     /* Window Tint */
     .window-tint-module {
-        height: 45vh; /* Otimização máxima para visualização imediata */
-        min-height: 400px;
-        margin-bottom: 30px;
-    }
-
-    .tint-pricing-container {
-        margin-bottom: 50px;
-    }
-
-    .how-it-works-module {
-        padding-top: 60px !important;
-        clear: both;
+        height: auto; /* Alterado para auto no mobile para evitar cortes de conteúdo */
+        min-height: 450px;
+        margin-bottom: 0;
     }
 
     .tint-overlay {
-        padding: 60px 0;
+        padding: 80px 0;
+        position: relative;
     }
 
     .tint-grid {
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin-bottom: 40px;
     }
+
+    .tint-pricing-list {
+        padding: 30px 15px;
+        margin: 40px 10px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 15px;
+    }
+
+    /* How It Works */
+    .how-it-works-module {
+        padding: 80px 0 !important;
+        margin-top: 0;
+        clear: both;
+        background: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .how-it-works-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+
 
     .tint-pricing-list {
         padding: 25px 15px;
