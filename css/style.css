@@ -1262,6 +1262,11 @@ nav a.btn-quote:hover {
         z-index: 1;
     }
 
+    .why-choose-module {
+        padding-bottom: 60px;
+        background: #fff;
+    }
+
     .how-it-works-content {
         display: flex;
         flex-direction: column;
