@@ -1139,22 +1139,22 @@ nav a.btn-quote:hover {
     }
 
     .content-module {
-        padding: 50px 0;
+        padding: 40px 0; /* Reduzido de 50px para otimizar espaço vertical */
     }
 
     h3 {
-        font-size: 2.2rem; /* Aumentado de 1.8rem */
-        margin-bottom: 30px;
+        font-size: 2rem; /* Reduzido de 2.2rem para melhor equilíbrio visual */
+        margin-bottom: 25px;
     }
 
     .section-title {
-        font-size: 1.3rem; /* Aumentado de 1.1rem */
+        font-size: 1.2rem; /* Reduzido de 1.3rem para evitar quebras */
     }
 
     /* Hero & A/C Section */
     .ac-services-module {
-        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
-        min-height: 500px;
+        height: 50vh; /* Reduzido de 60vh para visualização imediata do conteúdo */
+        min-height: 450px;
     }
 
     .ac-overlay {
@@ -1177,13 +1177,13 @@ nav a.btn-quote:hover {
 
     /* Hero Message */
     #ac-services-message {
-        padding: 80px 0;
-        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
-        min-height: 500px;
+        padding: 60px 0;
+        height: 50vh; /* Reduzido de 60vh */
+        min-height: 450px;
     }
 
     #ac-services-message h1 {
-        font-size: 2.2rem; /* Aumentado de 1.8rem */
+        font-size: 2rem; /* Reduzido de 2.2rem */
     }
 
     .chat-widget {
@@ -1198,7 +1198,7 @@ nav a.btn-quote:hover {
 
     /* Cards */
     .benefit-card, .car-card, .ac-service-card {
-        padding: 25px 20px;
+        padding: 20px 15px; /* Reduzido padding interno para otimizar espaço */
     }
 
     .car-card {
@@ -1225,8 +1225,8 @@ nav a.btn-quote:hover {
 
     /* Window Tint */
     .window-tint-module {
-        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
-        min-height: 500px;
+        height: 50vh; /* Reduzido de 60vh */
+        min-height: 450px;
     }
 
     .tint-overlay {
@@ -1250,7 +1250,11 @@ nav a.btn-quote:hover {
     .footer-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 40px;
+        gap: 30px;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 12px; /* Aumentado espaçamento para melhor touch target */
     }
 
     .social-links {
@@ -1273,7 +1277,7 @@ nav a.btn-quote:hover {
     }
 
     h3 {
-        font-size: 1.8rem; /* Aumentado de 1.5rem */
+        font-size: 1.7rem; /* Ajuste fino para telas pequenas */
     }
 
     .header-content .logo img {
@@ -1281,8 +1285,12 @@ nav a.btn-quote:hover {
     }
 
     nav a {
-        font-size: 0.9rem; /* Aumentado de 0.75rem */
-        margin: 3px;
+        font-size: 0.85rem; /* Ajuste para evitar quebras no menu */
+        margin: 4px;
+    }
+
+    .btn-quote {
+        margin-bottom: 15px !important; /* Adicionada margem inferior para separação */
     }
 
     .btn-primary {
