@@ -1143,8 +1143,9 @@ nav a.btn-quote:hover {
     }
 
     h3 {
-        font-size: 2rem; /* Reduzido de 2.2rem para melhor equilíbrio visual */
-        margin-bottom: 25px;
+        font-size: 1.9rem; /* Ajuste fino para S24 */
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
     }
 
     .section-title {
@@ -1153,8 +1154,8 @@ nav a.btn-quote:hover {
 
     /* Hero & A/C Section */
     .ac-services-module {
-        height: 50vh; /* Reduzido de 60vh para visualização imediata do conteúdo */
-        min-height: 450px;
+        height: 45vh; /* Otimização máxima para visualização imediata */
+        min-height: 400px;
     }
 
     .ac-overlay {
@@ -1198,7 +1199,9 @@ nav a.btn-quote:hover {
 
     /* Cards */
     .benefit-card, .car-card, .ac-service-card {
-        padding: 20px 15px; /* Reduzido padding interno para otimizar espaço */
+        padding: 18px 12px; /* Reduzido padding interno para otimizar espaço */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .car-card {
