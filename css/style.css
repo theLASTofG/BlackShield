@@ -23,8 +23,9 @@ html {
 body {
     font-family: var(--font-main);
     color: var(--color-text-dark);
-    line-height: 1.6;
+    line-height: 1.7; /* Aumentado para melhor legibilidade */
     overflow-x: hidden;
+    font-size: 18px; /* Aumentado de padrão (geralmente 16px) para 18px */
 }
 
 .container {
@@ -40,8 +41,8 @@ body {
 .section-title {
     color: var(--color-primary);
     text-transform: uppercase;
-    font-size: 1.3rem; 
-    margin-bottom: 10px;
+    font-size: 1.5rem; /* Aumentado de 1.3rem */
+    margin-bottom: 15px;
     text-align: center;
     font-weight: 700;
     letter-spacing: 2px;
@@ -49,7 +50,7 @@ body {
 
 h3 {
     text-align: center;
-    font-size: 2.5rem; 
+    font-size: 3rem; /* Aumentado de 2.5rem */
     color: var(--color-secondary);
     margin-bottom: 50px;
 }
@@ -131,7 +132,7 @@ nav a {
     text-decoration: none;
     margin: 0 15px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Aumentado de 0.9rem */
     transition: color 0.3s ease, border-bottom 0.3s ease;
     padding-bottom: 5px;
     border-bottom: 2px solid transparent;
@@ -1133,23 +1134,27 @@ nav a.btn-quote:hover {
 
 /* Mobile Devices (up to 768px) */
 @media (max-width: 768px) {
+    body {
+        font-size: 18px; /* Garantindo fonte legível no mobile */
+    }
+
     .content-module {
         padding: 50px 0;
     }
 
     h3 {
-        font-size: 1.8rem;
+        font-size: 2.2rem; /* Aumentado de 1.8rem */
         margin-bottom: 30px;
     }
 
     .section-title {
-        font-size: 1.1rem;
+        font-size: 1.3rem; /* Aumentado de 1.1rem */
     }
 
     /* Hero & A/C Section */
     .ac-services-module {
-        height: auto;
-        min-height: 100vh;
+        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
+        min-height: 500px;
     }
 
     .ac-overlay {
@@ -1173,10 +1178,12 @@ nav a.btn-quote:hover {
     /* Hero Message */
     #ac-services-message {
         padding: 80px 0;
+        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
+        min-height: 500px;
     }
 
     #ac-services-message h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem; /* Aumentado de 1.8rem */
     }
 
     .chat-widget {
@@ -1217,6 +1224,11 @@ nav a.btn-quote:hover {
     }
 
     /* Window Tint */
+    .window-tint-module {
+        height: 60vh; /* Limitando altura do vídeo gigante no mobile */
+        min-height: 500px;
+    }
+
     .tint-overlay {
         padding: 60px 0;
     }
@@ -1256,8 +1268,12 @@ nav a.btn-quote:hover {
 
 /* Small Mobile Devices (up to 480px) */
 @media (max-width: 480px) {
+    body {
+        font-size: 17px;
+    }
+
     h3 {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Aumentado de 1.5rem */
     }
 
     .header-content .logo img {
@@ -1265,7 +1281,7 @@ nav a.btn-quote:hover {
     }
 
     nav a {
-        font-size: 0.75rem;
+        font-size: 0.9rem; /* Aumentado de 0.75rem */
         margin: 3px;
     }
 
