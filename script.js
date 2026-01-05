@@ -1,3 +1,4 @@
+// Manus Test: GitHub Connector Modification Test
 // Header transparency effect on scroll
 const header = document.getElementById('main-header');
 let lastScrollTop = 0;
