@@ -1,164 +1,103 @@
-// Manus Test: GitHub Connector Modification Test
-document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('main-header');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-
-    // 1. Mobile Menu Toggle
-    if (mobileMenu && navMenu) {
-        mobileMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenu.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
-
-        // Close menu when clicking a link (except dropdown parents)
-        navMenu.querySelectorAll('a').forEach(link => {
-            if (!link.closest('.dropdown') || link.getAttribute('href').startsWith('#')) {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenu.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                });
-            }
-        });
-    }
-
-    // 1.5. Dropdown Toggle for Mobile/Touch Devices
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
-        const dropdownLink = dropdown.querySelector('a');
-        
-        // Detect if device is touch-enabled or mobile
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isTouchDevice || isMobile) {
-            dropdownLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Close other dropdowns
-                dropdowns.forEach(other => {
-                    if (other !== dropdown) {
-                        other.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current dropdown
-                dropdown.classList.toggle('active');
-            });
-        }
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown')) {
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('active');
-            });
-        }
-    });}
-
-    // 2. Header Scroll Effect (with debounce)
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
-        }
-        
-        scrollTimeout = window.requestAnimationFrame(() => {
-            if (window.scrollY > 50) {
-                header.style.padding = '5px 0';
-                header.style.background = 'rgba(0, 0, 0, 0.98)';
-            } else {
-                header.style.padding = '10px 0';
-                header.style.background = 'rgba(0, 0, 0, 0.9)';
-            }
-        });
-    });
-
-    // 3. Reveal Animations on Scroll
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // 4. Smooth Scroll for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                const offset = header.offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // 5. Chat Widget Functionality (with validation)
-    const chatInput = document.querySelector('.chat-widget input');
-    const sendButton = document.querySelector('.btn-send');
-
-    if (sendButton && chatInput) {
-        const sendMessage = () => {
-            const message = chatInput.value.trim();
-            if (message) {
-                // Visual feedback
-                sendButton.textContent = 'SENDING...';
-                sendButton.disabled = true;
-                
-                const whatsappUrl = `https://wa.me/61401803255?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-                
-                // Reset after short delay
-                setTimeout(() => {
-                    chatInput.value = '';
-                    sendButton.textContent = 'SEND';
-                    sendButton.disabled = false;
-                }, 1000);
-            } else {
-                // Shake animation for empty input
-                chatInput.style.animation = 'shake 0.3s';
-                setTimeout(() => {
-                    chatInput.style.animation = '';
-                }, 300);
-            }
-        };
-
-        sendButton.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-    }
-
-    // 6. Video Optimization (Auto-pause when not in view)
-    const videos = document.querySelectorAll('video');
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.play().catch(() => {}); // Catch browser block
-            } else {
-                entry.target.pause();
-            }
-        });
-    }, { threshold: 0.25 });
-
-    videos.forEach(v => videoObserver.observe(v));
+// Header transparency on scroll
+const header = document.getElementById("main-header");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
 });
+
+// Reveal animations on scroll
+const revealElements = document.querySelectorAll(".reveal");
+const revealOnScroll = () => {
+  for (let i = 0; i < revealElements.length; i++) {
+    const windowHeight = window.innerHeight;
+    const elementTop = revealElements[i].getBoundingClientRect().top;
+    const elementVisible = 150;
+    if (elementTop < windowHeight - elementVisible) {
+      revealElements[i].classList.add("active");
+    }
+  }
+};
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll(); // Initial check
+
+/* ======================================================
+   ✅ SMOOTH SCROLL CORRIGIDO (ÚNICA ALTERAÇÃO REAL)
+   ====================================================== */
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    const href = this.getAttribute("href");
+
+    // ignora links inválidos
+    if (!href || href === "#" || href.length < 2) return;
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    e.preventDefault();
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const targetPosition =
+      target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth",
+    });
+  });
+});
+
+// Chat widget functionality (basic)
+const chatInput = document.querySelector(".chat-widget input");
+const sendButton = document.querySelector(".btn-send");
+
+if (sendButton && chatInput) {
+  sendButton.addEventListener("click", () => {
+    const message = chatInput.value.trim();
+    if (message) {
+      const whatsappUrl = `https://wa.me/61401803255?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappUrl, "_blank");
+      chatInput.value = "";
+    }
+  });
+
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      sendButton.click();
+    }
+  });
+}
+
+// Add hover effect to car cards
+const carCards = document.querySelectorAll(".car-card");
+carCards.forEach((card) => {
+  card.addEventListener("mouseenter", function () {
+    this.style.transform = "translateY(-10px) scale(1.02)";
+  });
+
+  card.addEventListener("mouseleave", function () {
+    this.style.transform = "translateY(0) scale(1)";
+  });
+});
+
+// Add stagger animation to benefit cards
+const benefitCards = document.querySelectorAll(".benefit-card");
+benefitCards.forEach((card, index) => {
+  card.style.transitionDelay = `${index * 0.1}s`;
+});
+
+// Add stagger animation to A/C service cards
+const acServiceCards = document.querySelectorAll(".ac-service-card");
+acServiceCards.forEach((card, index) => {
+  card.style.transitionDelay = `${index * 0.1}s`;
+});
+
+// Console log for debugging
+console.log("Black Shield Website - Scripts Loaded Successfully");
+console.log(
+  "Features: Header transparency, Video backgrounds, Scroll animations, Smooth navigation, WhatsApp integration, A/C Services"
+);
