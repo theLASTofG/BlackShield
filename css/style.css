@@ -1681,14 +1681,7 @@ section {
 }
 
 .wt-title-accent::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 8px;
-    width: 72px;
-    height: 5px;
-    background: var(--color-accent);
-    border-radius: 3px;
+    display: none;
 }
 
 /* Subtitle */
