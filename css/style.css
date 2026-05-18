@@ -2408,44 +2408,76 @@ section {
    FAQ SECTION
    ============================================================ */
 .faq-module {
-    background: var(--color-light-bg);
+    background: linear-gradient(160deg, #0e0e0e 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-module::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(107,139,46,0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.faq-module .section-eyebrow {
+    color: var(--color-accent);
+}
+
+.faq-module .section-title {
+    color: #fff;
+}
+
+.faq-module h3 {
+    color: rgba(255,255,255,0.55);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    margin-bottom: 0;
 }
 
 .faq-list {
     max-width: 820px;
-    margin: 40px auto 0;
+    margin: 44px auto 0;
+    position: relative;
+    z-index: 1;
 }
 
 .faq-item {
     background: #fff;
-    border-radius: 14px;
-    margin-bottom: 10px;
+    border-radius: 16px;
+    margin-bottom: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border: 1px solid transparent;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.35);
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .faq-item:has(.faq-question[aria-expanded="true"]) {
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 20px rgba(85,107,47,0.12);
+    border-left-color: var(--color-accent);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    transform: translateX(6px);
 }
 
 .faq-question {
     width: 100%;
     background: none;
     border: none;
-    padding: 22px 24px;
+    padding: 22px 24px 22px 20px;
     text-align: left;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: 700;
-    color: var(--color-secondary);
+    color: #111;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease;
     font-family: var(--font-main);
     line-height: 1.4;
 }
@@ -2458,13 +2490,21 @@ section {
 
 .faq-question[aria-expanded="true"] i {
     transform: rotate(180deg);
+    color: var(--color-accent);
 }
 
 .faq-question i {
     flex-shrink: 0;
-    color: var(--color-accent);
-    transition: transform 0.35s ease;
-    font-size: 0.85rem;
+    width: 28px;
+    height: 28px;
+    background: var(--color-light-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: transform 0.35s ease, background 0.25s ease, color 0.25s ease;
+    font-size: 0.72rem;
 }
 
 .faq-answer {
@@ -2479,11 +2519,13 @@ section {
 
 .faq-answer p {
     color: #555;
-    line-height: 1.75;
-    font-size: 0.97rem;
-    padding: 0 24px 22px;
+    line-height: 1.78;
+    font-size: 0.96rem;
+    padding: 2px 24px 24px 20px;
     margin: 0;
     text-align: left;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 16px;
 }
 
 .faq-answer a {
@@ -2493,12 +2535,22 @@ section {
 }
 
 @media (max-width: 768px) {
-    .faq-question {
-        font-size: 0.97rem;
-        padding: 18px 18px;
+    .faq-item:has(.faq-question[aria-expanded="true"]) {
+        transform: none;
     }
+
+    .faq-question {
+        font-size: 0.95rem;
+        padding: 18px 16px 18px 14px;
+    }
+
     .faq-answer p {
-        padding: 0 18px 18px;
-        font-size: 0.92rem;
+        padding: 2px 16px 20px 14px;
+        font-size: 0.91rem;
+    }
+
+    .faq-module h3 {
+        font-size: 0.95rem;
+        padding: 0 10px;
     }
 }
