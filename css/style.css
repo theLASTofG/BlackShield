@@ -1167,7 +1167,12 @@ nav a.btn-quote:hover {
 }
 
 .footer-logo {
+    display: block;
+    width: auto;
     height: 40px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
     margin-bottom: 15px;
 }
 
@@ -1525,6 +1530,12 @@ nav a.btn-quote:hover {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 30px;
+    }
+
+    .footer-logo {
+        margin-left: auto;
+        margin-right: auto;
+        object-position: center;
     }
 
     .footer-col ul li {
