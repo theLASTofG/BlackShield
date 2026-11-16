@@ -135,10 +135,18 @@ input:focus-visible {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    flex: 0 0 auto;
 }
 
 .logo img {
+    display: block;
     height: 40px;
+    width: auto;
+    max-width: 100%;
     transition: height 0.3s ease;
 }
 
@@ -1234,8 +1242,8 @@ nav a.btn-quote:hover {
     }
 }
 
-/* Tablets (up to 992px) */
-@media (max-width: 992px) {
+/* Compact navigation before the desktop links can overflow. */
+@media (max-width: 1200px) {
     .menu-toggle {
         display: flex;
     }
@@ -1300,7 +1308,10 @@ nav a.btn-quote:hover {
         width: 80%;
         text-align: center;
     }
+}
 
+/* Tablets (up to 992px) */
+@media (max-width: 992px) {
     .how-it-works-content {
         flex-direction: column;
         padding: 30px 20px;
