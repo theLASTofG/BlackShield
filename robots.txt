@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /.claude/
 
-Sitemap: https://blackshield.com.au/sitemap.xml
+Sitemap: https://blackshieldcar.com.au/sitemap.xml

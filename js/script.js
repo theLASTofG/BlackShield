@@ -11,6 +11,7 @@ window.addEventListener("scroll", () => {
 });
 
 // Reveal animations using IntersectionObserver (replaces scroll listener)
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -24,9 +25,75 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-// Stagger delay for benefit and A/C cards
-document.querySelectorAll(".benefit-card, .ac-service-card").forEach((card, index) => {
-  card.style.transitionDelay = `${index * 0.1}s`;
+// Load decorative background videos only when they are close to the viewport.
+const hydrateVideo = (video) => {
+  if (video.dataset.loaded === "true") return;
+  video.querySelectorAll("source[data-src]").forEach((source) => {
+    source.src = source.dataset.src;
+    source.removeAttribute("data-src");
+  });
+  video.dataset.loaded = "true";
+  video.load();
+};
+
+const lazyVideos = document.querySelectorAll("[data-lazy-video]");
+if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
+  const videoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          hydrateVideo(video);
+          video.play().catch(() => {});
+        } else if (video.dataset.loaded === "true") {
+          video.pause();
+        }
+      });
+    },
+    { rootMargin: "300px 0px", threshold: 0.01 }
+  );
+  lazyVideos.forEach((video) => videoObserver.observe(video));
+} else if (!prefersReducedMotion.matches) {
+  lazyVideos.forEach((video) => {
+    hydrateVideo(video);
+    video.play().catch(() => {});
+  });
+} else {
+  document.querySelectorAll("video").forEach((video) => video.pause());
+}
+
+// Car photo galleries
+document.querySelectorAll("[data-car-gallery]").forEach((gallery) => {
+  const photos = Array.from(gallery.querySelectorAll(".car-img"));
+  const dotsContainer = gallery.querySelector(".gallery-dots");
+  const previousButton = gallery.querySelector(".gallery-prev");
+  const nextButton = gallery.querySelector(".gallery-next");
+  let activeIndex = 0;
+
+  const dots = photos.map((_, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = `gallery-dot${index === 0 ? " active" : ""}`;
+    dot.setAttribute("aria-label", `Show photo ${index + 1} of ${photos.length}`);
+    dot.setAttribute("aria-pressed", String(index === 0));
+    dot.addEventListener("click", () => showPhoto(index));
+    dotsContainer.appendChild(dot);
+    return dot;
+  });
+
+  const showPhoto = (index) => {
+    activeIndex = (index + photos.length) % photos.length;
+    photos.forEach((photo, photoIndex) => {
+      const isActive = photoIndex === activeIndex;
+      photo.classList.toggle("active", isActive);
+      photo.setAttribute("aria-hidden", String(!isActive));
+      dots[photoIndex].classList.toggle("active", isActive);
+      dots[photoIndex].setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  previousButton.addEventListener("click", () => showPhoto(activeIndex - 1));
+  nextButton.addEventListener("click", () => showPhoto(activeIndex + 1));
 });
 
 // Smooth scroll for anchor links
@@ -40,7 +107,10 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     const headerHeight = header ? header.offsetHeight : 0;
     const targetPosition =
       target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-    window.scrollTo({ top: targetPosition, behavior: "smooth" });
+    window.scrollTo({
+      top: targetPosition,
+      behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+    });
   });
 });
 
@@ -84,17 +154,30 @@ document.querySelectorAll(".faq-question").forEach((btn) => {
 const mobileMenu = document.getElementById("mobile-menu");
 const navMenu = document.getElementById("nav-menu");
 if (mobileMenu && navMenu) {
-  mobileMenu.addEventListener("click", () => {
-    const isActive = mobileMenu.classList.toggle("active");
-    navMenu.classList.toggle("active");
+  const setMenuState = (isActive) => {
+    mobileMenu.classList.toggle("active", isActive);
+    navMenu.classList.toggle("active", isActive);
     mobileMenu.setAttribute("aria-expanded", String(isActive));
+    mobileMenu.setAttribute(
+      "aria-label",
+      isActive ? "Close navigation menu" : "Open navigation menu"
+    );
+  };
+
+  mobileMenu.addEventListener("click", () => {
+    setMenuState(!mobileMenu.classList.contains("active"));
   });
 
   document.querySelectorAll("nav a").forEach((link) => {
     link.addEventListener("click", () => {
-      mobileMenu.classList.remove("active");
-      navMenu.classList.remove("active");
-      mobileMenu.setAttribute("aria-expanded", "false");
+      setMenuState(false);
     });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navMenu.classList.contains("active")) {
+      setMenuState(false);
+      mobileMenu.focus();
+    }
   });
 }
